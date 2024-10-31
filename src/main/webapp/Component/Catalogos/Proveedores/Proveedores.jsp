@@ -5,20 +5,20 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="content-wrapper">
-
     <div class="container-xxl flex-grow-1 container-p-y">
-
         <div class="card">
             <div class="mt-5 mx-5">
                 <div class="app-producto">
                     <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-6 row-gap-4">
                         <div class="d-flex flex-column justify-content-center">
-                            <h4 class="mb-1">Catalogo de empleados</h4>
-                            <p class="mb-0">Listado de empleados siscom</p>
+                            <h4 class="mb-1">Catálogo de proveedores</h4>
+                            <p class="mb-0">Listado de proveedores</p>
                         </div>
                         <div class="d-flex align-content-center flex-wrap gap-4">
-                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exLargeModal">
+                            <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                                 Nuevo&nbsp;<i class='bx bx-add-to-queue bx-rotate-90' ></i>
                             </button>
                         </div>
@@ -26,6 +26,16 @@
                 </div>
             </div>
             <div class="table-responsive text-nowrap">
+                <c:if test="${!empty(success)}">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success alert-dismissible">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                                    ${success}
+                            </div>
+                        </div>
+                    </div>
+                </c:if>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -34,154 +44,202 @@
                             <th>NIT</th>
                             <th>Dirección</th>
                             <th>Teléfono</th>
-                            <th>Fecha de ingreso</th>
                             <th>Estado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody class="table-border-bottom-0">
-                        <tr>
-                            <td>1</td>
-                            <td>Luis Fernando Toledo Rodríguez</td>
-                            <td>6ta avenida 20-28 san francisco I</td>
-                            <td>+502 30585028</td>
-                            <td>Gerente de operaciones</td>
-                            <td>22/08/2024</td>
-                            <td><span class="badge bg-label-primary me-1">Activo</span></td>
-
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#exLargeModal"
-                                           ><i class="bx bx-edit-alt me-1"></i>Detalles y Edición</a
-                                        >
-                                        <a class="dropdown-item" href="javascript:void(0);"
-                                           ><i class="bx bx-trash me-1"></i> Eliminar</a
-                                        >
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                    <c:choose>
+                        <c:when test="${!empty(Listado)}">
+                            <c:forEach var="proveedor" items="${Listado}">
+                                <tr>
+                                    <td>${proveedor.idProveedor}</td>
+                                    <td>${proveedor.proveedor}</td>
+                                    <td>${proveedor.nit}</td>
+                                    <td>${proveedor.direccion}</td>
+                                    <td>${proveedor.telefono}</td>
+                                    <td>
+                                    <span class="badge ${proveedor.idEstado == 1 ? 'bg-label-primary' : 'bg-label-danger'} me-1">
+                                            ${proveedor.idEstado == 1 ? 'Activo' : 'Inactivo'}
+                                    </span>
+                                    </td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                <i class="bx bx-dots-vertical-rounded"></i>
+                                            </button>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#update" onclick="setSelectedIndex(this.closest('tr'))">
+                                                    <i class="bx bx-edit-alt me-1"></i> Editar
+                                                </a>
+                                                <a class="dropdown-item" href="${pageContext.request.contextPath}/proveedores?action=delete&id=${proveedor.idProveedor}">
+                                                    <i class="bx bx-trash me-1"></i> Eliminar
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <tr>
+                                <td colspan="7">No hay información para mostrar</td>
+                            </tr>
+                        </c:otherwise>
+                    </c:choose>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
 
-
-
-
-    <div class="modal fade" id="exLargeModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
+    <div class="modal fade" id="create" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="modal"
-                        aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12 col-lg-8">
-                            <div class="card mb-6">
-                                <div class="card-header">
-                                    <h5 class="card-tile mb-0">Datos del empleado</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="row g-6">
-                                        <div class="col-6 mb-3">
-                                            <label class="form-label" for="ecommerce-product-name">Nombres</label>
-                                            <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Ingrese el código de barras" name="productTitle" aria-label="Product title">
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <label class="form-label" for="ecommerce-product-name">Apellidos</label>
-                                            <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Ingrese el código de barras" name="productTitle" aria-label="Product title">
-                                        </div>
+                <form id="form-proveedores-create" action="${pageContext.request.contextPath}/proveedores?action=create" method="POST">
+                    <div class="modal-header">
+                        <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <div>
+                                    <div class="card-header">
+                                        <h5 class="card-tile mb-0">Información del proveedor:</h5>
                                     </div>
-                                    <div class="row g-6">
-                                        <div class="col-6 mb-3">
-                                            <label class="form-label" for="ecommerce-product-name">DPI</label>
-                                            <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Ingrese el código de barras" name="productTitle" aria-label="Product title">
-                                        </div>
-                                        <div class="col-6 mb-3">
-                                            <label class="form-label" for="ecommerce-product-name">Télefono</label>
-                                            <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Ingrese el código de barras" name="productTitle" aria-label="Product title">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label" for="ecommerce-product-name">Dirección</label>
-                                        <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Ingrese la descripción del producto" name="productTitle" aria-label="Product title">
-                                    </div>
-
-                                    <div class="row g-6">
-                                        <div class="col-6">
-                                            <label for="language" class="form-label">Género</label>
-                                            <div class="input-group">
-                                                <select
-                                                    class="form-select"
-                                                    id="inputGroupSelect04">
-                                                    <option selected>Selecciona un género</option>
-                                                    <option value="1">Masculino</option>
-                                                    <option value="2">Femenino</option>
-                                                </select>
+                                    <div class="card-body mt-3">
+                                        <div class="row">
+                                            <div class="mb-3 col-12">
+                                                <label class="form-label">Proveedor</label>
+                                                <input type="text" class="form-control" name="proveedor" placeholder="Ingrese el nombre del proveedor">
                                             </div>
                                         </div>
 
-                                        <div class="col-6">
-                                            <label for="language" class="form-label">Puesto</label>
-                                            <div class="input-group">
-                                                <select
-                                                    class="form-select"
-                                                    id="inputGroupSelect04">
-                                                    <option selected>Seleccione un puesto</option>
-                                                    <option value="1">Gerente de operaciones</option>
-                                                    <option value="2">Vendedor</option>
-                                                </select>
+                                        <div class="row">
+                                            <div class="mb-3 col-12">
+                                                <label class="form-label">Direccion</label>
+                                                <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección del proveedor">
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="col-12 col-lg-4">
-                            <div class="card mb-6">
-                                <div class="card-header">
-                                    <h5 class="card-title mb-0">Fechas</h5>
-                                </div>
-                                <div class="card-body">
-
-                                    <div class="mb-3">
-                                        <label for="dobBasic" class="form-label">Fecha de nacimiento</label>
-                                        <input type="date" id="dobBasic" class="form-control" />
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="dobBasic" class="form-label">Fecha de ingreso</label>
-                                        <input type="date" id="dobBasic" class="form-control" />
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="dobBasic" class="form-label">Fecha de inicio de labores</label>
-                                        <input type="date" id="dobBasic" class="form-control" />
+                                        <div class="row">
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label">Télefono</label>
+                                                <input type="text" class="form-control" name="telefono" placeholder="Ingrese el télefono">
+                                            </div>
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label">Nit</label>
+                                                <input type="text" class="form-control" name="nit" placeholder="Ingrese el nit">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-right: 1rem;">
-                        Cancelar
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        Guardar
-                    </button>
-                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-right: 1rem;">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Crear
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="update" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="form-marcas-update" action="${pageContext.request.contextPath}/proveedores?action=update" method="POST">
+                    <div class="modal-header">
+                        <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-12">
+                                <div>
+                                    <div class="card-header">
+                                        <h5 class="card-tile mb-0">Información del puesto:</h5>
+                                    </div>
+                                    <div class="card-body mt-3">
+                                        <div style="display: none">
+                                            <label class="form-label">Id</label>
+                                            <input type="text" class="form-control" id="id" name="id" readonly />
+                                        </div>
+                                        <div class="row">
+                                            <div class="mb-3 col-12">
+                                                <label class="form-label">Proveedor</label>
+                                                <input type="text" class="form-control" id="proveedor" name="proveedor" placeholder="Ingrese el nombre del proveedor">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="mb-3 col-12">
+                                                <label class="form-label">Direccion</label>
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección del proveedor">
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label">Télefono</label>
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el télefono">
+                                            </div>
+                                            <div class="mb-3 col-6">
+                                                <label class="form-label">Nit</label>
+                                                <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese el nit">
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-6">
+                                            <div class="col-12">
+                                                <label class="form-label">Estado</label>
+                                                <div class="input-group">
+                                                    <select class="form-select" id="estado" name="estado">
+                                                        <option value="1">Activo</option>
+                                                        <option value="0">Inactivo</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="margin-right: 1rem;">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            Guardar
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function setSelectedIndex(row) {
+        const cells = row.querySelectorAll("td");
+        document.getElementById("id").value = cells[0].innerText;
+        document.getElementById("proveedor").value = cells[1].innerText;
+        document.getElementById("nit").value = cells[2].innerText;
+        document.getElementById("direccion").value = cells[3].innerText;
+        document.getElementById("telefono").value = cells[4].innerText;
+        document.getElementById("estado").value = cells[5].innerText === 'Activo' ? '1' : '0';
+    }
+</script>

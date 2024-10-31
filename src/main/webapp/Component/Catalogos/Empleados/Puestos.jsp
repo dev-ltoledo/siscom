@@ -21,7 +21,7 @@
                         <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                             Nuevo&nbsp;<i class='bx bx-add-to-queue bx-rotate-90' ></i>
                         </button>
-                        <a class="btn btn-warning" href="MainLayout.jsp?page=/Component/Catalogos/Empleados/Empleados.jsp">
+                        <a class="btn btn-warning" href="${pageContext.request.contextPath}/empleados">
                             Ir a empleados&nbsp;<i class='bx bx-navigation' ></i>
                         </a>
                     </div>
@@ -96,7 +96,7 @@
 <div class="modal fade" id="create" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="form-marcas-create" action="${pageContext.request.contextPath}/puestos?action=create" method="POST">
+            <form id="form-puestos-create" action="${pageContext.request.contextPath}/puestos?action=create" method="POST">
                 <div class="modal-header">
                     <button
                             type="button"
@@ -137,7 +137,7 @@
 <div class="modal fade" id="update" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="form-marcas-update" action="${pageContext.request.contextPath}/puestos?action=update" method="POST">
+            <form id="form-puestos-update" action="${pageContext.request.contextPath}/puestos?action=update" method="POST">
                 <div class="modal-header">
                     <button
                             type="button"

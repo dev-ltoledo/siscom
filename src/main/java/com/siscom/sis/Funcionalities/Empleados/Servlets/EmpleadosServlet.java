@@ -103,12 +103,12 @@ public class EmpleadosServlet extends HttpServlet {
         int id = Integer.parseInt(request.getParameter("id"));
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
-        String direccion = request.getParameter("direccion");
-        String telefono = request.getParameter("telefono");
         String dpi = request.getParameter("dpi");
         boolean genero = Boolean.parseBoolean(request.getParameter("genero"));
-        LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("fechaNacimiento")); // Asumiendo formato 'YYYY-MM-DD'
+        String telefono = request.getParameter("telefono");
+        String direccion = request.getParameter("direccion");
         short idPuesto = Short.parseShort(request.getParameter("idPuesto"));
+        LocalDate fechaNacimiento = LocalDate.parse(request.getParameter("fechaNacimiento")); // Asumiendo formato 'YYYY-MM-DD'
         LocalDate fechaInicioLabor = LocalDate.parse(request.getParameter("fechaInicioLabor")); // Asumiendo formato 'YYYY-MM-DD'
 
         EmpleadosModel model = new EmpleadosModel();

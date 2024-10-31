@@ -172,7 +172,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="MainLayout.jsp?page=/Component/Catalogos/Proveedores/Proveedores.jsp" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/proveedores" class="menu-link">
                     <div class="text-truncate">Catálogo proveedores</div>
                   </a>
                 </li>                
