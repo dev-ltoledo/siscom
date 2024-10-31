@@ -15,6 +15,9 @@
                             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                                 Nuevo&nbsp;<i class='bx bx-add-to-queue bx-rotate-90'></i>
                             </button>
+                            <a class="btn btn-warning" href="${pageContext.request.contextPath}/puestos">
+                                Ir a puestos&nbsp;<i class='bx bx-navigation' ></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -147,18 +150,39 @@
                                             </div>
                                         </div>
 
-                                        <div class="row">
+
+                                            <div class="row">
+                                                <div class="mb-3 col-6">
+                                                    <label class="form-label">Estado</label>
+                                                    <div class="input-group">
+                                                        <select class="form-select" name="idPuesto">
+                                                            <c:choose>
+                                                                <c:when test="${!empty(Puesto)}">
+                                                                    <c:forEach var="puesto" items="${Puesto}">
+                                                                        <option value="${puesto.idPuesto}">${puesto.puesto}</option>
+                                                                    </c:forEach>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <option value="9999">Sin puestos</option>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                        </select>
+                                                    </div>
+                                                </div>
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Fecha de nacimiento:</label>
                                                 <input type="date" class="form-control" name="fechaNacimiento" required>
                                             </div>
-                                            <div class="mb-3 col-6">
-                                                <label class="form-label">Fecha de inicio laboral:</label>
-                                                <input type="date" class="form-control" name="fechaInicioLabor" required>
-                                            </div>
+
                                         </div>
 
-                                    </div>
+                                            <div class="row">
+                                                <div class="mb-3 col-6">
+                                                    <label class="form-label">Fecha de inicio laboral:</label>
+                                                    <input type="date" class="form-control" name="fechaInicioLabor" required>
+                                                </div>
+                                            </div>
+
                                 </div>
                             </div>
                         </div>
@@ -194,7 +218,7 @@
                                     <div class="card-body mt-3">
                                         <div style="display: none">
                                             <label class="form-label">Id</label>
-                                            <input type="text" class="form-control" id="id" name="idEmpleado" readonly />
+                                            <input type="text" class="form-control" id="id" name="id" readonly />
                                         </div>
 
                                         <div class="row">
