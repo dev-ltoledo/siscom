@@ -36,6 +36,29 @@ public class MarcasRepository {
         return marcas;
     }
 
+    public List<MarcasModel> getAcctive() {
+        String query = "SELECT * FROM marca WHERE id_estado = 1";
+        List<MarcasModel> marcas = new ArrayList<>();
+
+        try (var preparedStatement = conexion.prepareStatement(query)) {
+
+            try (var resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+
+                    var IdMarca = resultSet.getInt("id_marca");
+                    var Marca = resultSet.getString("marca");
+                    var IdEstado = resultSet.getInt("id_estado");
+
+                    var marca = new MarcasModel(IdMarca, Marca, IdEstado);
+                    marcas.add(marca);
+                }
+            }
+        }catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+        return marcas;
+    }
+
     public void put(MarcasModel marcas) {
         String query = "UPDATE marca SET marca = ?, id_estado = ? WHERE id_marca = ?";
         try (var preparedStatement = conexion.prepareStatement(query)) {

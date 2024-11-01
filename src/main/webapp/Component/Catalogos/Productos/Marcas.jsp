@@ -23,7 +23,7 @@
                             <button type="submit" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create">
                                 Nuevo&nbsp;<i class='bx bx-add-to-queue bx-rotate-90' ></i>
                             </button>
-                            <a class="btn btn-warning" href="MainLayout.jsp?page=/Component/Catalogos/Productos/Productos.jsp">
+                            <a class="btn btn-warning" href="${pageContext.request.contextPath}/productos">
                                 Ir a productos&nbsp;<i class='bx bx-navigation' ></i>
                             </a>
                         </div>
