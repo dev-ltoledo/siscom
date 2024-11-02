@@ -91,7 +91,7 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Compra y ventas</span></li>
             <li class="menu-item">
               <a
-                href="MainLayout.jsp?page=/Component/CompraVenta/Ventas.jsp"                
+                href="${pageContext.request.contextPath}/ventas"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate">Ventas</div>
