@@ -1,10 +1,9 @@
-<%-- 
+<%--
     Document   : Menu
     Created on : 28/09/2024, 11:36:09 p. m.
     Author     : ltoledo
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="${pageContext.request.contextPath}/Inicio" class="app-brand-link">
@@ -72,14 +71,14 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Principal</span>
             </li>
-            
+
             <li class="menu-item active open">
               <a href="${pageContext.request.contextPath}/Inicio" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
                 <div class="text-truncate">Inicio</div>
-              </a>              
+              </a>
             </li>
-            
+
              <!-- Compras y ventas -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Compra y ventas</span></li>
             <li class="menu-item">
@@ -102,7 +101,7 @@
             <!-- Catalogos -->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">Catalogos</span>
-            </li>            
+            </li>
             <!-- Pages -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
@@ -114,17 +113,17 @@
                   <a href="${pageContext.request.contextPath}/productos" class="menu-link">
                     <div class="text-truncate">Catálogo Productos</div>
                   </a>
-                </li>                
+                </li>
               </ul>
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/marcas" class="menu-link">
                     <div class="text-truncate">Catálogo Marcas</div>
                   </a>
-                </li>                
+                </li>
               </ul>
             </li>
-            
+
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
@@ -135,9 +134,9 @@
                   <a href="${pageContext.request.contextPath}/clientes" class="menu-link">
                     <div class="text-truncate">Catálogo clientes</div>
                   </a>
-                </li>    
+                </li>
                 <li class="menu-item">
-              <a href="javascript:void(0);" class="menu-link menu-toggle">                
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <div class="text-truncate">Empleados</div>
               </a>
               <ul class="menu-sub">
@@ -145,19 +144,19 @@
                   <a href="${pageContext.request.contextPath}/empleados" class="menu-link">
                     <div class="text-truncate">Catálogo empleados</div>
                   </a>
-                </li>                                
+                </li>
               </ul>
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/puestos" class="menu-link">
                     <div class="text-truncate">Catálogo puestos</div>
                   </a>
-                </li>                                
+                </li>
               </ul>
             </li>
-              </ul>                
+              </ul>
             </li>
-                                    
+
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cube-alt"></i>
@@ -168,9 +167,9 @@
                   <a href="${pageContext.request.contextPath}/proveedores" class="menu-link">
                     <div class="text-truncate">Catálogo proveedores</div>
                   </a>
-                </li>                
+                </li>
               </ul>
             </li>
-            
+
           </ul>
         </aside>

@@ -51,7 +51,7 @@
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                         <i class="bx bx-power-off bx-md me-3"></i><span>Cerrar sesión</span>
                       </a>
                     </li>
