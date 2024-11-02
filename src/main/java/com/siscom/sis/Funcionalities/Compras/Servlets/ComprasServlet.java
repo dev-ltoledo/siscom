@@ -1,11 +1,11 @@
-package com.siscom.sis.Funcionalities.Ventas.Servlets;
+package com.siscom.sis.Funcionalities.Compras.Servlets;
 
-import com.siscom.sis.Funcionalities.Clientes.Repositories.ClientesRepository;
-import com.siscom.sis.Funcionalities.Empleados.Repositories.EmpleadoRepository;
+import com.siscom.sis.Funcionalities.Compras.Models.ComprasDetalleModel;
+import com.siscom.sis.Funcionalities.Compras.Models.ComprasModel;
+import com.siscom.sis.Funcionalities.Compras.Repositories.ComprasRepository;
 import com.siscom.sis.Funcionalities.Productos.Repositories.ProductosRepository;
+import com.siscom.sis.Funcionalities.Proveedores.Repositories.ProveedoresRepository;
 import com.siscom.sis.Funcionalities.Ventas.Models.VentasDetalleModel;
-import com.siscom.sis.Funcionalities.Ventas.Models.VentasModel;
-import com.siscom.sis.Funcionalities.Ventas.Repositories.VentasRepository;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,18 +20,16 @@ import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@WebServlet(name = "ventas", value = "/ventas")
-public class VentasServlet extends HttpServlet {
+@WebServlet(name = "compras", value = "/compras")
+public class ComprasServlet extends HttpServlet {
 
-    private VentasRepository ventasRepository;
-    private EmpleadoRepository empleadoRepository;
-    private ClientesRepository clientesRepository;
+    private ComprasRepository comprasRepository;
     private ProductosRepository productosRepository;
+    private ProveedoresRepository proveedoresRepository;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,10 +45,9 @@ public class VentasServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Connection connection = (Connection) session.getAttribute("conexion");
 
-        ventasRepository = new VentasRepository(connection);
-        empleadoRepository = new EmpleadoRepository(connection);
-        clientesRepository = new ClientesRepository(connection);
+        comprasRepository = new ComprasRepository(connection);
         productosRepository = new ProductosRepository(connection);
+        proveedoresRepository = new ProveedoresRepository(connection);
 
         String action = request.getParameter("action");
         if (action == null) {
@@ -71,38 +68,35 @@ public class VentasServlet extends HttpServlet {
     }
 
     private void read(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        var listado = ventasRepository.get();
-        var listadoEmpleados = empleadoRepository.get();
-        var listadoClientes = clientesRepository.get();
-        var listadoProductos = productosRepository.get();
+        var listado = comprasRepository.get();
+        var listadoProveedores = proveedoresRepository.getActive();
+        var listadoProductos = productosRepository.getActive();
 
         request.setAttribute("Listado", listado);
-        request.setAttribute("Empleados", listadoEmpleados);
-        request.setAttribute("Clientes", listadoClientes);
+        request.setAttribute("Proveedores", listadoProveedores);
         request.setAttribute("Productos", listadoProductos);
 
-        request.getRequestDispatcher("Component/Layout/MainLayout.jsp?page=/Component/CompraVenta/Ventas.jsp").forward(request, response);
+        request.getRequestDispatcher("Component/Layout/MainLayout.jsp?page=/Component/CompraVenta/Compras.jsp").forward(request, response);
     }
 
     private void getDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int idVenta = Integer.parseInt(request.getParameter("idVenta")); // Obtener el ID de la solicitud
-        List<VentasDetalleModel> detallesVenta = ventasRepository.getDetailById(idVenta); // Obtener los detalles de la venta
+        int idCompra = Integer.parseInt(request.getParameter("idCompra"));
+        List<ComprasDetalleModel> detallesCompra = comprasRepository.getDetailById(idCompra);
 
-        // Genera el HTML solo para los detalles de la venta solicitada
         StringBuilder htmlResponse = new StringBuilder();
 
-        if (detallesVenta != null && !detallesVenta.isEmpty()) {
-            for (VentasDetalleModel detalle : detallesVenta) {
+        if (detallesCompra != null && !detallesCompra.isEmpty()) {
+            for (ComprasDetalleModel detalle : detallesCompra) {
                 htmlResponse.append("<tr>")
                         .append("<td>").append(detalle.getProducto()).append("</td>")
                         .append("<td>").append(detalle.getDescripcion()).append("</td>")
                         .append("<td>").append(detalle.getCantidad()).append("</td>")
-                        .append("<td>Q").append(detalle.getPrecioUnitario()).append("</td>")
+                        .append("<td>Q").append(detalle.getPrecioCostoUnitario()).append("</td>")
                         .append("<td>Q").append(detalle.getTotal()).append("</td>")
                         .append("</tr>");
             }
         } else {
-            htmlResponse.append("<tr><td colspan='6'>No se encontraron detalles para esta venta.</td></tr>");
+            htmlResponse.append("<tr><td colspan='6'>No se encontraron detalles para esta compra.</td></tr>");
         }
 
         // Configura el tipo de respuesta como HTML
@@ -113,23 +107,18 @@ public class VentasServlet extends HttpServlet {
     }
 
     private void create(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String noFactura = request.getParameter("factura");
-        char serie = request.getParameter("serie").charAt(0);
-        LocalDate fechaFactura = LocalDate.parse(request.getParameter("fechaFactura")); // Formato 'YYYY-MM-DD'
-        int idCliente = Integer.parseInt(request.getParameter("idCliente"));
-        int idEmpleado = Integer.parseInt(request.getParameter("idEmpleado"));
-        LocalDateTime fechaIngreso = LocalDateTime.now();
+        Integer noOrdenCompra = Integer.parseInt(request.getParameter("noOrdenCompra"));
+        int idProveedor = Integer.parseInt(request.getParameter("idProveedor"));
+        LocalDate fechaOrden = LocalDate.parse(request.getParameter("fechaOrden")); // Formato 'YYYY-MM-DD'
+        Timestamp fechaIngreso = Timestamp.valueOf(LocalDateTime.now());
 
-        VentasModel model = new VentasModel();
-
-        model.setNoFactura(Integer.valueOf(noFactura));
-        model.setSerie(serie);
-        model.setFechaFactura(Date.valueOf(fechaFactura));
-        model.setIdCliente(idCliente);
-        model.setIdEmpleado(idEmpleado);
+        ComprasModel model = new ComprasModel();
+        model.setNoOrdenCompra(noOrdenCompra);
+        model.setIdProveedor(idProveedor);
+        model.setFechaOrden(Date.valueOf(fechaOrden));
         model.setFechaIngreso(fechaIngreso);
 
-        int idVenta = ventasRepository.post(model);
+        int idCompra = comprasRepository.post(model);
 
         String[] productos = request.getParameterValues("idProducto");
         String[] cantidades = request.getParameterValues("cantidad");
@@ -145,14 +134,14 @@ public class VentasServlet extends HttpServlet {
                 String idProducto = productos[i];
                 String cantidad = cantidadesFinales[i];
 
-                ventasRepository.postDetalle(idVenta, idProducto, cantidad);
-                productosRepository.putCantidad(idProducto, cantidad);
+                comprasRepository.postDetalle(idCompra, idProducto, cantidad);
+                productosRepository.putCantidadPercent(idProducto, cantidad);
             }
         } else {
             System.out.println("No se recibieron productos en el carrito.");
         }
 
-        request.setAttribute("success", "Venta registrada correctamente");
-        request.getRequestDispatcher("/ventas?action=list").forward(request, response);
+        request.setAttribute("success", "Compra registrada correctamente");
+        request.getRequestDispatcher("/compras?action=list").forward(request, response);
     }
 }

@@ -8,7 +8,7 @@
     <script type="text/javascript">
         // Redirigir automáticamente al cargar la página
         window.onload = function() {
-            window.location.href = "${pageContext.request.contextPath}/Inicio";
+            window.location.href = "${pageContext.request.contextPath}/Login";
         };
     </script>
 </head>
