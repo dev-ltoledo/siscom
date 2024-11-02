@@ -44,6 +44,37 @@ public class ProductosRepository {
         return productos;
     }
 
+    public List<ProductosModel> getActive() {
+        String query = "SELECT id_producto, producto, m.id_marca, m.marca, descripcion, imagen, precio_costo, precio_venta, existencia, fecha_ingreso, p.id_estado FROM producto p inner join marca m on p.id_marca = m.id_marca WHERE p.id_estado = 1";
+        List<ProductosModel> productos = new ArrayList<>();
+
+        try (var preparedStatement = conexion.prepareStatement(query)) {
+
+            try (var resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+
+                    var idProducto = resultSet.getInt("id_producto");
+                    var producto = resultSet.getString("producto");
+                    var idMarca = resultSet.getShort("id_marca");
+                    var marca = resultSet.getString("marca");
+                    var descripcion = resultSet.getString("descripcion");
+                    var imagen = resultSet.getString("imagen");
+                    var precioCosto = resultSet.getBigDecimal("precio_costo");
+                    var precioVenta = resultSet.getBigDecimal("precio_venta");
+                    var existencia = resultSet.getInt("existencia");
+                    var fechaIngreso = resultSet.getTimestamp("fecha_ingreso").toLocalDateTime();
+                    var idEstado = resultSet.getInt("id_estado");
+
+                    var productoModel = new ProductosModel(idProducto, producto, idMarca, marca, descripcion, imagen, precioCosto, precioVenta, existencia, fechaIngreso, idEstado);
+                    productos.add(productoModel);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+        return productos;
+    }
+
     public void put(ProductosModel producto) {
         String query = "UPDATE producto SET producto = ?, id_marca = ?, descripcion = ?, precio_costo = ?, precio_venta = ?, existencia = ? WHERE id_producto = ?";
         try (var preparedStatement = conexion.prepareStatement(query)) {
@@ -63,6 +94,18 @@ public class ProductosRepository {
 
     public void putCantidad(String idProducto, String cantidad) {
         String query = "UPDATE producto SET existencia = existencia - ? WHERE id_producto = ?";
+        try (var preparedStatement = conexion.prepareStatement(query)) {
+            preparedStatement.setString(1, cantidad);
+            preparedStatement.setString(2, idProducto);
+            preparedStatement.executeUpdate();
+            System.out.println("Producto actualizado con exito");
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    public void putCantidadPercent(String idProducto, String cantidad) {
+        String query = "UPDATE producto SET existencia = existencia + ?, precio_costo = precio_costo * 1.25, precio_venta = precio_venta  * 1.25 WHERE id_producto = ?";
         try (var preparedStatement = conexion.prepareStatement(query)) {
             preparedStatement.setString(1, cantidad);
             preparedStatement.setString(2, idProducto);

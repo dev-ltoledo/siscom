@@ -133,7 +133,7 @@
                                             <div class="mb-3 col-4">
 
                                                     <label class="form-label">Fecha de facturación:</label>
-                                                    <input type="date" class="form-control" id="fechaNacimiento" name="fechaFactura" required>
+                                                    <input type="date" class="form-control" name="fechaFactura" required>
 
                                             </div>
                                         </div>

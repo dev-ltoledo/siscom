@@ -39,6 +39,32 @@ public class ProveedoresRepository {
         return proveedores;
     }
 
+    public List<ProveedoresModel> getActive() {
+        String query = "SELECT * FROM proveedor WHERE id_estado = 1";
+        List<ProveedoresModel> proveedores = new ArrayList<>();
+
+        try (var preparedStatement = conexion.prepareStatement(query)) {
+
+            try (var resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+
+                    var idProveedor = resultSet.getInt("id_proveedor");
+                    var proveedor = resultSet.getString("proveedor");
+                    var nit = resultSet.getString("nit");
+                    var direccion = resultSet.getString("direccion");
+                    var telefono = resultSet.getString("telefono");
+                    var idEstado = resultSet.getInt("id_estado");
+
+                    var proveedorModel = new ProveedoresModel(idProveedor, proveedor, nit, direccion, telefono, idEstado);
+                    proveedores.add(proveedorModel);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+        return proveedores;
+    }
+
     public void put(ProveedoresModel proveedor) {
         String query = "UPDATE proveedor SET proveedor = ?, nit = ?, direccion = ?, telefono = ?, id_estado = ? WHERE id_proveedor = ?";
         try (var preparedStatement = conexion.prepareStatement(query)) {

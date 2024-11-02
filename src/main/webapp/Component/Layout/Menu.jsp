@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="${pageContext.request.contextPath}/Inicio" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -74,18 +74,11 @@
             </li>
             
             <li class="menu-item active open">
-              <a href="MainLayout.jsp?page=/Component/Principal/Inicio.jsp" class="menu-link">
+              <a href="${pageContext.request.contextPath}/Inicio" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-smile"></i>
                 <div class="text-truncate">Inicio</div>
               </a>              
-            </li> 
-            
-            <li class="menu-item">
-              <a href="MainLayout.jsp?page=/Component/Principal/Grafica.jsp" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                <div class="text-truncate">Graficas</div>
-              </a>              
-            </li>      
+            </li>
             
              <!-- Compras y ventas -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Compra y ventas</span></li>
@@ -99,7 +92,7 @@
             </li>
             <li class="menu-item">
               <a
-                href="MainLayout.jsp?page=/Component/CompraVenta/Ventas.jsp"                
+                href="${pageContext.request.contextPath}/compras"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">Compras</div>

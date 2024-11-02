@@ -16,18 +16,7 @@
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item d-flex align-items-center">
-                  <i class="bx bx-search bx-md"></i>
-                  <input
-                    type="text"
-                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
-                    placeholder="Buscar opción..."
-                    aria-label="Search..." />
-                </div>
-              </div>
-              <!-- /Search -->
+
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
@@ -61,11 +50,6 @@
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-user bx-md me-3"></i><span>Mi perfil</span>
-                      </a>
-                    </li>                                    
                     <li>
                       <a class="dropdown-item" href="javascript:void(0);">
                         <i class="bx bx-power-off bx-md me-3"></i><span>Cerrar sesión</span>
