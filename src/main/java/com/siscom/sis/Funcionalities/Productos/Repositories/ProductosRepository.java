@@ -61,6 +61,18 @@ public class ProductosRepository {
         }
     }
 
+    public void putCantidad(String idProducto, String cantidad) {
+        String query = "UPDATE producto SET existencia = existencia - ? WHERE id_producto = ?";
+        try (var preparedStatement = conexion.prepareStatement(query)) {
+            preparedStatement.setString(1, cantidad);
+            preparedStatement.setString(2, idProducto);
+            preparedStatement.executeUpdate();
+            System.out.println("Producto actualizado con exito");
+        } catch (SQLException e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
     public void post(ProductosModel producto) {
         String query = "INSERT INTO producto (producto, id_marca, descripcion, imagen, precio_costo, precio_venta, existencia, fecha_ingreso) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try (var preparedStatement = conexion.prepareStatement(query)) {
