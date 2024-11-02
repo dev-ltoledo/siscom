@@ -28,12 +28,12 @@
                 </div>
             </div>
             <div class="table-responsive text-nowrap">
-                <c:if test="${!empty(success)}">
+                <c:if test="${!empty(error)}">
                     <div class="row">
                         <div class="col-12">
                             <div class="alert alert-success alert-dismissible">
                                 <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                                    ${success}
+                                    ${error}
                             </div>
                         </div>
                     </div>

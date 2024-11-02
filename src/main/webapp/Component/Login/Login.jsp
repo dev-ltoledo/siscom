@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!doctype html>
 
@@ -131,12 +132,22 @@
                 <input
                         type="password"
                         class="form-control"
-                        name="usuario"
+                        name="password"
                         placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                         aria-describedby="password" />
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
               </div>
             </div>
+            <c:if test="${!empty(error)}">
+              <div class="row">
+                <div class="col-12">
+                  <div class="alert alert-danger alert-dismissible">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                      ${error}
+                  </div>
+                </div>
+              </div>
+            </c:if>
             <div class="mb-6">
               <button class="btn btn-primary d-grid w-100" type="submit">Ingresar</button>
             </div>

@@ -1,5 +1,6 @@
 package com.siscom.sis.Funcionalities.Empleados.Servlets;
 
+import com.siscom.sis.Funcionalities.Autenticacion.Models.MenuModel;
 import com.siscom.sis.Funcionalities.Empleados.Models.EmpleadosModel;
 import com.siscom.sis.Funcionalities.Empleados.Repositories.EmpleadoRepository;
 import com.siscom.sis.Funcionalities.Puestos.Repositories.PuestosRepository;
@@ -10,10 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+import java.awt.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @WebServlet(name = "empleados", value = "/empleados")
 public class EmpleadosServlet extends HttpServlet {
@@ -34,6 +37,7 @@ public class EmpleadosServlet extends HttpServlet {
     private void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         Connection connection = (Connection) session.getAttribute("conexion");
+        List<MenuModel> menuList = (List<MenuModel>) session.getAttribute("menuList");
 
         _empleado = new EmpleadoRepository(connection);
         _puesto = new PuestosRepository(connection);
