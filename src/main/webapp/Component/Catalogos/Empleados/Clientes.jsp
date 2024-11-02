@@ -118,24 +118,24 @@
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Nombre:</label>
-                                                <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre">
+                                                <input type="text" class="form-control" name="nombre" placeholder="Ingrese el nombre" required>
                                             </div>
 
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Apellido:</label>
-                                                <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido">
+                                                <input type="text" class="form-control" name="apellido" placeholder="Ingrese el apellido" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">NIT:</label>
-                                                <input type="text" class="form-control" name="nit" placeholder="Ingrese el NIT">
+                                                <input type="text" class="form-control" name="nit" placeholder="Ingrese el NIT" required>
                                             </div>
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Género</label>
-                                                <div class="input-group">
-                                                    <select class="form-select" name="genero">
+                                                <div class="input-group" >
+                                                    <select class="form-select" name="genero" required>
                                                         <option value="True">Masculino</option>
                                                         <option value="False">Femenino</option>
                                                     </select>
@@ -146,12 +146,12 @@
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Télefono:</label>
-                                                <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono">
+                                                <input type="text" class="form-control" name="telefono" placeholder="Ingrese el telefono" required>
                                             </div>
 
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Correo electronico:</label>
-                                                <input type="text" class="form-control" name="correoElectronico" placeholder="Ingrese el correo electronico">
+                                                <input type="text" class="form-control" name="correoElectronico" placeholder="Ingrese el correo electronico" required>
                                             </div>
                                         </div>
 
@@ -200,24 +200,24 @@
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Nombre:</label>
-                                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre">
+                                                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre" required>
                                             </div>
 
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Apellido:</label>
-                                                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese el apellido">
+                                                <input type="text" class="form-control" id="apellido" name="apellido" placeholder="Ingrese el apellido" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">NIT:</label>
-                                                <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese el NIT">
+                                                <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese el NIT" required>
                                             </div>
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Género</label>
                                                 <div class="input-group">
-                                                    <select class="form-select" id="genero" name="genero">
+                                                    <select class="form-select" id="genero" name="genero" required>
                                                         <option value="True">Masculino</option>
                                                         <option value="False">Femenino</option>
                                                     </select>
@@ -228,12 +228,12 @@
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Télefono:</label>
-                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono">
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el telefono" required>
                                             </div>
 
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Correo electronico:</label>
-                                                <input type="text" class="form-control" id="correoElectronico" name="correoElectronico" placeholder="Ingrese el correo electronico">
+                                                <input type="text" class="form-control" id="correoElectronico" name="correoElectronico" placeholder="Ingrese el correo electronico" required>
                                             </div>
                                         </div>
 

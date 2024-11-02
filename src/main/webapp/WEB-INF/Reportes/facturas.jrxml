@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.3.final using JasperReports Library version 6.21.3-4a3078d20785ebe464f18037d738d12fc98c13cf  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="facturas" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="cad12de4-b11f-4122-ab95-638641e3f219">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter"/>
+	<queryString language="SQL">
+		<![CDATA[select id_venta, no_factura, serie, fecha_factura, c.id_cliente, c.nit, e.id_empleado, concat(e.nombre, ' ', e.apellido) empleado, v.fecha_ingreso from venta v inner join cliente c on v.id_cliente = c.id_cliente inner join empleado e on v.id_empleado = e.id_empleado;]]>
+	</queryString>
+	<field name="serie" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="serie"/>
+		<property name="com.jaspersoft.studio.field.label" value="serie"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venta"/>
+	</field>
+	<field name="no_factura" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.name" value="no_factura"/>
+		<property name="com.jaspersoft.studio.field.label" value="no_factura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venta"/>
+	</field>
+	<field name="fecha_factura" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.name" value="fecha_factura"/>
+		<property name="com.jaspersoft.studio.field.label" value="fecha_factura"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="venta"/>
+	</field>
+	<field name="empleado" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.name" value="empleado"/>
+		<property name="com.jaspersoft.studio.field.label" value="empleado"/>
+	</field>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="38dda030-4410-4d75-b196-125ef5ae1a84"/>
+				<staticText>
+					<reportElement x="20" y="20" width="515" height="43" forecolor="#FFFFFF" uuid="a85a357e-8853-40a4-99d1-d9fa474efc64"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Facturas emitidas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="20" y="60" width="360" height="20" forecolor="#FFFFFF" uuid="10d8f7f3-5c61-495d-b2b3-3fb275d46df2"/>
+					<textElement textAlignment="Left">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Listado de facturas de empleados]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="7b1c5da9-751f-49d7-9ea3-f98bc675d606"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="210" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e532590d-614a-49eb-b3aa-29ae40c1376d">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6c8301a3-40c3-457e-8b41-8bcc90cbc75c"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Factura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="210" y="0" width="170" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="addfced0-4f59-4413-b82b-37b328ebc72f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="69bfb67f-ca60-4fa3-83bc-916deb2da781"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha de facturacion]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="380" y="0" width="172" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="65772de3-2540-4636-b799-d4693d4d76c2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f64b63f1-af04-4b76-94e3-fc53cf680189"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Empleado]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="a26e6abd-9888-4a33-bc2a-0c547db50d7e"/>
+			</line>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="0" y="0" width="100" height="20" uuid="37f92731-def9-4ac9-bb88-32e14e8808c9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="d4fa8e3d-784b-45fc-8709-9a1dbcd3a0b6"/>
+				</reportElement>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{serie}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="100" y="0" width="110" height="20" uuid="60ce8ef7-3895-43be-85d6-e7a02f5269d2">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6c8301a3-40c3-457e-8b41-8bcc90cbc75c"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{no_factura}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="240" y="0" width="140" height="20" uuid="abf70016-f3bd-45a4-9582-f52b43950392">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="69bfb67f-ca60-4fa3-83bc-916deb2da781"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_factura}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="380" y="0" width="172" height="20" uuid="063d2f03-bd51-47b5-984e-a74cc76bdeeb">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f64b63f1-af04-4b76-94e3-fc53cf680189"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empleado}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="18031d25-8e21-4e29-8025-cb7c3800ce10"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="f300400b-048a-4216-8fce-5c45d7723ad9"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="180d34bf-e332-489f-ad60-f7030a20565a"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>

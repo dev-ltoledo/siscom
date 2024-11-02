@@ -116,7 +116,7 @@
                                     <div class="card-body mt-3">
                                         <div class="mb-3">
                                             <label class="form-label">Marca</label>
-                                            <input type="text" class="form-control" name="marca" placeholder="Ingrese la descripción de la marca">
+                                            <input type="text" class="form-control" name="marca" placeholder="Ingrese la descripción de la marca" required>
                                         </div>
                                     </div>
                                 </div>
@@ -162,14 +162,14 @@
 
                                         <div class="mb-3">
                                             <label class="form-label">Marca</label>
-                                            <input type="text" class="form-control" id="marca" name="marca" placeholder="Ingrese la descripción de la marca">
+                                            <input type="text" class="form-control" id="marca" name="marca" placeholder="Ingrese la descripción de la marca" required>
                                         </div>
 
                                         <div class="row g-6">
                                             <div class="col-12">
                                                 <label class="form-label">Estado</label>
                                                 <div class="input-group">
-                                                    <select class="form-select" id="estado" name="estado">
+                                                    <select class="form-select" id="estado" name="estado" required>
                                                         <option value="1">Activo</option>
                                                         <option value="0">Inactivo</option>
                                                     </select>

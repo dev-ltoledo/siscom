@@ -114,7 +114,7 @@
                                 <div class="card-body mt-3">
                                     <div class="mb-3">
                                         <label class="form-label">Puesto</label>
-                                        <input type="text" class="form-control" name="puesto" placeholder="Ingrese el puesto">
+                                        <input type="text" class="form-control" name="puesto" placeholder="Ingrese el puesto" required>
                                     </div>
                                 </div>
                             </div>
@@ -160,14 +160,14 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Puesto</label>
-                                        <input type="text" class="form-control" id="puesto" name="puesto" placeholder="Ingrese el nombre del puesto">
+                                        <input type="text" class="form-control" id="puesto" name="puesto" placeholder="Ingrese el nombre del puesto" required>
                                     </div>
 
                                     <div class="row g-6">
                                         <div class="col-12">
                                             <label class="form-label">Estado</label>
                                             <div class="input-group">
-                                                <select class="form-select" id="estado" name="estado">
+                                                <select class="form-select" id="estado" name="estado" required>
                                                     <option value="1">Activo</option>
                                                     <option value="0">Inactivo</option>
                                                 </select>

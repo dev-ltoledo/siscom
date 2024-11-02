@@ -115,25 +115,25 @@
                                         <div class="row">
                                             <div class="mb-3 col-12">
                                                 <label class="form-label">Proveedor</label>
-                                                <input type="text" class="form-control" name="proveedor" placeholder="Ingrese el nombre del proveedor">
+                                                <input type="text" class="form-control" name="proveedor" placeholder="Ingrese el nombre del proveedor" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="mb-3 col-12">
                                                 <label class="form-label">Direccion</label>
-                                                <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección del proveedor">
+                                                <input type="text" class="form-control" name="direccion" placeholder="Ingrese la dirección del proveedor" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Télefono</label>
-                                                <input type="text" class="form-control" name="telefono" placeholder="Ingrese el télefono">
+                                                <input type="text" class="form-control" name="telefono" placeholder="Ingrese el télefono" required>
                                             </div>
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Nit</label>
-                                                <input type="text" class="form-control" name="nit" placeholder="Ingrese el nit">
+                                                <input type="text" class="form-control" name="nit" placeholder="Ingrese el nit" required>
                                             </div>
                                         </div>
                                     </div>
@@ -180,25 +180,25 @@
                                         <div class="row">
                                             <div class="mb-3 col-12">
                                                 <label class="form-label">Proveedor</label>
-                                                <input type="text" class="form-control" id="proveedor" name="proveedor" placeholder="Ingrese el nombre del proveedor">
+                                                <input type="text" class="form-control" id="proveedor" name="proveedor" placeholder="Ingrese el nombre del proveedor" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="mb-3 col-12">
                                                 <label class="form-label">Direccion</label>
-                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección del proveedor">
+                                                <input type="text" class="form-control" id="direccion" name="direccion" placeholder="Ingrese la dirección del proveedor" required>
                                             </div>
                                         </div>
 
                                         <div class="row">
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Télefono</label>
-                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el télefono">
+                                                <input type="text" class="form-control" id="telefono" name="telefono" placeholder="Ingrese el télefono" required>
                                             </div>
                                             <div class="mb-3 col-6">
                                                 <label class="form-label">Nit</label>
-                                                <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese el nit">
+                                                <input type="text" class="form-control" id="nit" name="nit" placeholder="Ingrese el nit" required>
                                             </div>
                                         </div>
 
@@ -206,7 +206,7 @@
                                             <div class="col-12">
                                                 <label class="form-label">Estado</label>
                                                 <div class="input-group">
-                                                    <select class="form-select" id="estado" name="estado">
+                                                    <select class="form-select" id="estado" name="estado" required>
                                                         <option value="1">Activo</option>
                                                         <option value="0">Inactivo</option>
                                                     </select>
